@@ -23,6 +23,11 @@ nix:
     - zlib
     - ncurses
 
+image:
+  container:
+    name: 41px/getthumb
+    base: fpco/stack-run
+    
 # User packages to be built.
 # Various formats can be used as shown in the example below.
 # 

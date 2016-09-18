@@ -28,13 +28,10 @@ module Main where
 
 import Control.Lens
 import Data.Monoid
-import GHC.Generics
-import Data.Aeson
 import Data.Aeson.Lens
 import System.Environment
 import qualified Data.ByteString.Lazy as BL
 import qualified Data.Text as T
-import Control.Exception as E
 import System.FilePath.Posix
 import System.Directory
 import Network.Wreq
@@ -55,15 +52,15 @@ main :: IO ()
 main = do
   args <- getArgs
   case args of
-    [config, path] -> do
-      p <- doesDirectoryExist path
+    [config, jspath] -> do
+      p <- doesDirectoryExist jspath
       js <- BL.readFile(config)
       if not p then
-        createDirectory path
+        createDirectory jspath
       else
         return ()
-      traverseOf_ (members . key "thumb" . _String) (traitementThumb path) js
+      traverseOf_ (members . key "thumb" . _String) (traitementThumb jspath) js
       putStrLn "Fin des traitements"
     _ -> putStrLn usage
   where
-    usage = "prog config path"
+    usage = "getthumb config path"
