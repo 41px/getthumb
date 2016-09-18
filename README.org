@@ -1,0 +1,8 @@
+#+BEGIN_SRC sh
+getthumb sample/sample.js /tmp/gett
+#+END_SRC
+
+#+BEGIN_SRC sh
+docker run -it --rm -v /tmp/sample.js:/tmp/sample.js \ 
+-v /tmp/gett:/tmp/gett 41px/getthumb getthumb /tmp/sample.js /tmp/gett
+#+END_SRC
